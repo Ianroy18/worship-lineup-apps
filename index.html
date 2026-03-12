@@ -1,48 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Worship Lineup Apps</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worship Lineup App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1; /* Modern Indigo */
+            --primary-hover: #4f46e5;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space para sa bottom nav */
+        }
+
+        /* Header Style */
+        header {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.025em;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        /* Button Styles */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Features/Grid Section */
+        .features {
+            max-width: 1000px;
+            margin: -40px auto 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .card .btn-open {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card .btn-open:after {
+            content: ' →';
+            margin-left: 5px;
+            transition: margin 0.2s;
+        }
+
+        .card .btn-open:hover:after {
+            margin-left: 10px;
+        }
+
+        /* Bottom Navigation (Mobile Style) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px;
+            border-top: 1px solid #e2e8f0;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .features { margin-top: 20px; }
+        }
+    </style>
+</head>
 <body>
 
 <header>
-<h1>Worship Lineup Apps</h1>
-<p>Church Worship Team Management System</p>
-<a class="btn" href="login.html">Login to System</a>
-<!-- example of opening a modal from the home page -->
-<button class="btn" onclick="showModal({title:'Welcome', body:'This app helps you manage your worship team and setlists.'})">What is this?</button>
+    <h1>Worship Lineup</h1>
+    <p>Efficiently manage your team and setlists</p>
+    <div class="btn-container">
+        <a class="btn btn-primary" href="login.html">Login to System</a>
+        <button class="btn btn-outline" onclick="alert('This app helps you manage your worship team and setlists.')">Learn More</button>
+    </div>
 </header>
 
 <section class="features">
+    <div class="card">
+        <h3>Worship Team</h3>
+        <p>Manage your pool of musicians and singers. Assign roles and check availability.</p>
+        <a class="btn-open" href="modules/team.html">Open Module</a>
+    </div>
 
-<div class="card">
-<h3>Worship Team</h3>
-<p>Manage musicians and singers.</p>
-<a class="btn" href="modules/team.html">Open</a>
-</div>
+    <div class="card">
+        <h3>Song Library</h3>
+        <p>A centralized database for all your worship songs, lyrics, and chord sheets.</p>
+        <a class="btn-open" href="modules/songs.html">Open Module</a>
+    </div>
 
-<div class="card">
-<h3>Song Library</h3>
-<p>Store worship songs and chords.</p>
-<a class="btn" href="modules/songs.html">Open</a>
-</div>
-
-<div class="card">
-<h3>Service Lineup</h3>
-<p>Create song setlists for services.</p>
-<a class="btn" href="modules/lineup.html">Open</a>
-</div>
-
+    <div class="card">
+        <h3>Service Lineup</h3>
+        <p>Plan your Sunday services, create setlists, and share them with the whole team.</p>
+        <a class="btn-open" href="modules/lineup.html">Open Module</a>
+    </div>
 </section>
 
 <footer class="bottom-nav">
-  <a class="btn" href="modules/team.html">Team</a>
-  <a class="btn" href="modules/songs.html">Songs</a>
-  <a class="btn" href="modules/lineup.html">Lineup</a>
+    <a class="nav-item active" href="#">
+        <span>🏠</span>
+        Home
+    </a>
+    <a class="nav-item" href="modules/team.html">
+        <span>👥</span>
+        Team
+    </a>
+    <a class="nav-item" href="modules/songs.html">
+        <span>🎵</span>
+        Songs
+    </a>
+    <a class="nav-item" href="modules/lineup.html">
+        <span>📋</span>
+        Lineup
+    </a>
 </footer>
 
 </body>
