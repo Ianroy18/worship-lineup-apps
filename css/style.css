@@ -32,6 +32,44 @@ margin:10px 0;
 padding:8px;
 }
 
+/* layout improvements */
+header {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* fixed bottom navigation bar */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background: #fff;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+.bottom-nav .btn {
+  flex: 1;
+  margin: 0 5px;
+}
+
 button{
 padding:8px 15px;
 cursor:pointer;
