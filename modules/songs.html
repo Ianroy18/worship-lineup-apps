@@ -10,70 +10,63 @@
             --primary: #4f46e5;
             --bg: #f8fafc;
             --text: #1e293b;
+            --white: #ffffff;
         }
 
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); padding: 20px; color: var(--text); }
+        .container { max-width: 500px; margin: 0 auto; }
+
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .btn-home { text-decoration: none; color: var(--primary); font-weight: 600; }
+
+        .form-card { background: var(--white); padding: 24px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 24px; }
+        input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; }
         
-        .form-card {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: 20px auto;
+        .btn-add { 
+            width: 100%; padding: 12px; background: var(--primary); color: white; border: none; 
+            border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; 
         }
+        .btn-add:hover { background: #4338ca; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
 
-        .input-row { display: flex; gap: 10px; }
-        input { padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; flex: 1; }
-        
-        .btn-add { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; }
-
-        #songList { list-style: none; max-width: 500px; margin: 20px auto; }
-        
+        #songList { list-style: none; }
         .song-item {
-            background: white;
-            padding: 16px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background: var(--white); padding: 16px 20px; margin-bottom: 12px; border-radius: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid #f1f5f9; transition: all 0.2s ease;
         }
+        
+        /* Hover Effect for List Item */
+        .song-item:hover { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 8px 16px -4px rgba(0,0,0,0.1); }
 
         .key-badge {
-            background: #e0e7ff;
-            color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
+            background: #eef2ff; color: var(--primary); padding: 4px 14px; 
+            border-radius: 20px; font-size: 0.85rem; font-weight: 700;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Song Library</h1>
-    <a href="../index.html">Home</a>
-</header>
+<div class="container">
+    <header>
+        <h1>Song Library</h1>
+        <a href="../index.html" class="btn-home">Home</a>
+    </header>
 
-<div class="form-card">
-    <h3>Add New Song</h3>
-    <div class="input-row">
+    <div class="form-card">
+        <h3>Add New Song</h3>
         <input id="songTitle" placeholder="Song Title">
-        <input id="songKey" placeholder="Key (e.g. G)">
+        <input id="songKey" placeholder="Key (e.g. D)">
+        <button class="btn-add" onclick="addSong()">Add to Library</button>
     </div>
-    <button class="btn-add" style="width: 100%; margin-top: 10px;" onclick="addSong()">Add to Library</button>
-</div>
 
-<ul id="songList">
-    <li class="song-item">
-        <span>Way Maker</span>
-        <span class="key-badge">Key: D</span>
-    </li>
-</ul>
+    <ul id="songList">
+        <li class="song-item">
+            <strong>Way Maker</strong>
+            <span class="key-badge">Key: D</span>
+        </li>
+    </ul>
+</div>
 
 <footer class="bottom-nav">
     <a href="team.html">Team</a>
