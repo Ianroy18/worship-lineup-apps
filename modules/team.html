@@ -8,86 +8,76 @@
     <style>
         :root {
             --primary: #4f46e5;
+            --danger: #ef4444;
             --bg: #f8fafc;
-            --card: #ffffff;
             --text: #1e293b;
         }
 
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); padding: 20px; color: var(--text); }
-        
-        .form-section {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: 20px auto;
-        }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-        }
+        .container { max-width: 500px; margin: 0 auto; }
 
-        .btn-add {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
+        /* Form Design */
+        .form-card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 24px; }
+        input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; }
 
-        #teamList {
-            list-style: none;
-            max-width: 500px;
-            margin: 20px auto;
+        .btn-add { 
+            width: 100%; padding: 12px; background: var(--primary); color: white; border: none; 
+            border-radius: 8px; font-weight: 600; cursor: pointer; transition: background 0.3s ease; 
         }
+        .btn-add:hover { background: #4338ca; }
 
+        /* Hoverable Team List */
+        #teamList { list-style: none; }
         .team-item {
-            background: white;
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: white; padding: 16px; margin-bottom: 12px; border-radius: 12px;
+            display: flex; justify-content: space-between; align-items: center;
             border-left: 4px solid var(--primary);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
+        /* Hover State */
+        .team-item:hover { transform: translateX(5px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+
+        .btn-remove {
+            background: #fee2e2; color: var(--danger); border: none; padding: 8px 12px; 
+            border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: background 0.2s;
+        }
+        .btn-remove:hover { background: #fecaca; }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Worship Team</h1>
-    <a href="../index.html">Home</a>
-</header>
+<div class="container">
+    <header style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 20px;">
+        <h1>Worship Team</h1>
+        <a href="../index.html" style="text-decoration:none; color:var(--primary);">Home</a>
+    </header>
 
-<div class="form-section">
-    <h3>Add New Member</h3>
-    <input id="memberName" placeholder="Member Name">
-    <input id="instrument" placeholder="Instrument/Role">
-    <button class="btn-add" onclick="addMember()">Add to Team</button>
+    <div class="form-card">
+        <h3>Add New Member</h3>
+        <input id="memberName" placeholder="Member Name">
+        <input id="instrument" placeholder="Instrument/Role">
+        <button class="btn-add" onclick="addMember()">Add to Team</button>
+    </div>
+
+    <ul id="teamList">
+        <li class="team-item">
+            <div>
+                <strong>John Cruz</strong><br>
+                <small style="color: #64748b;">Guitarist</small>
+            </div>
+            <button class="btn-remove">Remove</button>
+        </li>
+    </ul>
 </div>
 
-<ul id="teamList">
-    <li class="team-item">
-        <div><strong>John Cruz</strong><br><small>Guitarist</small></div>
-        <button style="border:none; background:#fee2e2; color:#ef4444; padding:5px 10px; border-radius:6px;">Remove</button>
-    </li>
-</ul>
+
 
 <footer class="bottom-nav">
-    <a href="team.html">Team</a>
-    <a href="songs.html">Songs</a>
-    <a href="lineup.html">Lineup</a>
+    <a class="btn" href="team.html">Team</a>
+    <a class="btn" href="songs.html">Songs</a>
+    <a class="btn" href="lineup.html">Lineup</a>
 </footer>
 
 </body>
