@@ -35,65 +35,38 @@
         .input-group { display: flex; gap: 10px; }
         
         input { 
-            flex: 1; 
-            padding: 14px; 
-            background: #0f172a; 
-            border: 1px solid #334155; 
-            border-radius: 12px; 
-            color: white; 
+            flex: 1; padding: 14px; background: #0f172a; 
+            border: 1px solid #334155; border-radius: 12px; color: white; 
         }
         
         .btn-add { 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 0 20px; 
-            border-radius: 12px; 
-            font-weight: 700; 
-            cursor: pointer; 
+            background: var(--primary); color: white; border: none; 
+            padding: 0 20px; border-radius: 12px; font-weight: 700; cursor: pointer; 
         }
 
         #lineupList { list-style: none; max-width: 500px; margin: 20px auto; }
         
         .lineup-item {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            padding: 18px;
-            margin-bottom: 12px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            padding: 18px; margin-bottom: 12px; border-radius: 16px;
+            display: flex; align-items: center; gap: 15px;
             border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Number Badge */
         .lineup-number {
-            background: #334155;
-            color: var(--primary);
-            font-weight: 700;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 0.9rem;
+            background: #334155; color: var(--primary); font-weight: 700;
+            width: 32px; height: 32px; display: flex; align-items: center;
+            justify-content: center; border-radius: 50%; font-size: 0.9rem;
         }
 
         .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(20px);
-            padding: 20px;
-            display: flex;
-            justify-content: space-around;
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px);
+            padding: 20px; display: flex; justify-content: space-around;
             border-top: 1px solid #334155;
         }
     </style>
 </head>
-
 <body>
 
 <header style="text-align: center; margin-bottom: 20px;">
@@ -108,22 +81,49 @@
     </div>
 </div>
 
-<ul id="lineupList">
-    <li class="lineup-item">
-        <div class="lineup-number">1</div>
-        <span>Way Maker</span>
-    </li>
-    <li class="lineup-item">
-        <div class="lineup-number">2</div>
-        <span>Goodness of God</span>
-    </li>
-</ul>
+<ul id="lineupList"></ul>
 
 <footer class="bottom-nav">
     <a href="team.html" style="color: var(--text-muted); text-decoration: none;">Team</a>
     <a href="songs.html" style="color: var(--text-muted); text-decoration: none;">Songs</a>
     <a href="lineup.html" style="color: var(--primary); text-decoration: none; font-weight: 700;">Lineup</a>
 </footer>
+
+<script>
+    // Load list pagbukas ng page
+    document.addEventListener('DOMContentLoaded', loadLineup);
+
+    function addLineup() {
+        const input = document.getElementById('lineupSong');
+        const songName = input.value.trim();
+        if (!songName) return;
+
+        const list = JSON.parse(localStorage.getItem('myLineup') || '[]');
+        list.push(songName);
+        localStorage.setItem('myLineup', JSON.stringify(list));
+        
+        input.value = "";
+        renderList();
+    }
+
+    function renderList() {
+        const list = JSON.parse(localStorage.getItem('myLineup') || '[]');
+        const listElement = document.getElementById('lineupList');
+        listElement.innerHTML = '';
+
+        list.forEach((song, index) => {
+            const li = document.createElement('li');
+            li.className = 'lineup-item';
+            li.innerHTML = `
+                <div class="lineup-number">${index + 1}</div>
+                <span>${song}</span>
+            `;
+            listElement.appendChild(li);
+        });
+    }
+
+    function loadLineup() { renderList(); }
+</script>
 
 </body>
 </html>

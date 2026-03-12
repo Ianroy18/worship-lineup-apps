@@ -88,15 +88,7 @@
         <button class="btn-add" onclick="addMember()">Add to Team</button>
     </div>
 
-    <ul id="teamList">
-        <li class="team-item">
-            <div>
-                <strong style="display: block;">John Cruz</strong>
-                <small style="color: var(--text-muted);">Guitarist</small>
-            </div>
-            <button class="btn-remove">Remove</button>
-        </li>
-    </ul>
+    <ul id="teamList"></ul>
 </div>
 
 <footer class="bottom-nav">
@@ -104,6 +96,51 @@
     <a href="songs.html" style="color: var(--text-muted); text-decoration: none;">Songs</a>
     <a href="lineup.html" style="color: var(--text-muted); text-decoration: none;">Lineup</a>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', renderTeam);
+
+    function addMember() {
+        const name = document.getElementById('memberName').value;
+        const role = document.getElementById('instrument').value;
+        
+        if (!name || !role) return alert("Please fill in both fields");
+
+        const team = JSON.parse(localStorage.getItem('worshipTeam') || '[]');
+        team.push({ name, role });
+        localStorage.setItem('worshipTeam', JSON.stringify(team));
+        
+        document.getElementById('memberName').value = '';
+        document.getElementById('instrument').value = '';
+        renderTeam();
+    }
+
+    function removeMember(index) {
+        const team = JSON.parse(localStorage.getItem('worshipTeam') || '[]');
+        team.splice(index, 1);
+        localStorage.setItem('worshipTeam', JSON.stringify(team));
+        renderTeam();
+    }
+
+    function renderTeam() {
+        const team = JSON.parse(localStorage.getItem('worshipTeam') || '[]');
+        const list = document.getElementById('teamList');
+        list.innerHTML = '';
+
+        team.forEach((member, index) => {
+            const li = document.createElement('li');
+            li.className = 'team-item';
+            li.innerHTML = `
+                <div>
+                    <strong style="display: block;">${member.name}</strong>
+                    <small style="color: var(--text-muted);">${member.role}</small>
+                </div>
+                <button class="btn-remove" onclick="removeMember(${index})">Remove</button>
+            `;
+            list.appendChild(li);
+        });
+    }
+</script>
 
 </body>
 </html>

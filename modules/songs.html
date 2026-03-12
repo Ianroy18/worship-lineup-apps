@@ -10,6 +10,7 @@
             --bg-dark: #0f172a;
             --card-bg: rgba(30, 41, 59, 0.7);
             --primary: #3b82f6;
+            --danger: #ef4444;
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
         }
@@ -45,6 +46,7 @@
         }
 
         #songList { list-style: none; padding: 0; }
+        
         .song-item {
             background: var(--card-bg);
             backdrop-filter: blur(8px);
@@ -57,6 +59,12 @@
             background: rgba(59, 130, 246, 0.2); 
             color: var(--primary); padding: 6px 14px; 
             border-radius: 12px; font-size: 0.8rem; font-weight: 700;
+        }
+
+        .btn-remove {
+            background: rgba(239, 68, 68, 0.1); color: var(--danger); 
+            border: none; padding: 6px 12px; border-radius: 8px;
+            cursor: pointer; font-size: 0.7rem; margin-left: 10px;
         }
 
         .bottom-nav {
@@ -87,12 +95,7 @@
         <button class="btn-add" onclick="addSong()">Add to Library</button>
     </div>
 
-    <ul id="songList">
-        <li class="song-item">
-            <strong>Way Maker</strong>
-            <span class="key-badge">Key: D</span>
-        </li>
-    </ul>
+    <ul id="songList"></ul>
 </div>
 
 <footer class="bottom-nav">
@@ -100,6 +103,51 @@
     <a href="songs.html" style="color: var(--primary); text-decoration: none; font-weight: 700;">Songs</a>
     <a href="lineup.html" style="color: var(--text-muted); text-decoration: none;">Lineup</a>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', renderSongs);
+
+    function addSong() {
+        const title = document.getElementById('songTitle').value;
+        const key = document.getElementById('songKey').value;
+        
+        if (!title || !key) return alert("Please fill in both fields");
+
+        const library = JSON.parse(localStorage.getItem('songLibrary') || '[]');
+        library.push({ title, key });
+        localStorage.setItem('songLibrary', JSON.stringify(library));
+        
+        document.getElementById('songTitle').value = '';
+        document.getElementById('songKey').value = '';
+        renderSongs();
+    }
+
+    function removeSong(index) {
+        const library = JSON.parse(localStorage.getItem('songLibrary') || '[]');
+        library.splice(index, 1);
+        localStorage.setItem('songLibrary', JSON.stringify(library));
+        renderSongs();
+    }
+
+    function renderSongs() {
+        const library = JSON.parse(localStorage.getItem('songLibrary') || '[]');
+        const list = document.getElementById('songList');
+        list.innerHTML = '';
+
+        library.forEach((song, index) => {
+            const li = document.createElement('li');
+            li.className = 'song-item';
+            li.innerHTML = `
+                <div>
+                    <strong>${song.title}</strong>
+                    <span class="key-badge" style="margin-left: 10px;">Key: ${song.key}</span>
+                </div>
+                <button class="btn-remove" onclick="removeSong(${index})">Delete</button>
+            `;
+            list.appendChild(li);
+        });
+    }
+</script>
 
 </body>
 </html>
