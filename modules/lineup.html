@@ -7,68 +7,101 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --accent: #eef2ff;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --primary: #3b82f6;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
         }
 
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); padding: 20px; color: var(--text); }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            padding: 20px; 
+            color: var(--text-main);
+            min-height: 100vh;
+        }
 
         .builder-card {
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
             padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            border-radius: 24px;
             max-width: 500px;
             margin: 20px auto;
         }
 
         .input-group { display: flex; gap: 10px; }
-        input { flex: 1; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; }
         
-        .btn-add { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        input { 
+            flex: 1; 
+            padding: 14px; 
+            background: #0f172a; 
+            border: 1px solid #334155; 
+            border-radius: 12px; 
+            color: white; 
+        }
+        
+        .btn-add { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 0 20px; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            cursor: pointer; 
+        }
 
-        #lineupList { list-style: none; max-width: 500px; margin: 20px auto; counter-reset: step; }
+        #lineupList { list-style: none; max-width: 500px; margin: 20px auto; }
         
         .lineup-item {
-            background: white;
-            padding: 16px;
-            margin-bottom: 10px;
-            border-radius: 12px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             gap: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--primary);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .lineup-item::before {
-            counter-increment: step;
-            content: counter(step);
-            background: var(--accent);
+        /* Number Badge */
+        .lineup-number {
+            background: #334155;
             color: var(--primary);
             font-weight: 700;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             font-size: 0.9rem;
         }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #334155;
+        }
     </style>
 </head>
 
 <body>
 
-<header>
+<header style="text-align: center; margin-bottom: 20px;">
     <h1>Worship Lineup</h1>
-    <a href="../index.html">Home</a>
 </header>
 
 <div class="builder-card">
-    <h3>Build Setlist</h3>
+    <h3 style="margin-top: 0;">Build Setlist</h3>
     <div class="input-group">
         <input id="lineupSong" placeholder="Search song name...">
         <button class="btn-add" onclick="addLineup()">Add</button>
@@ -77,19 +110,19 @@
 
 <ul id="lineupList">
     <li class="lineup-item">
+        <div class="lineup-number">1</div>
         <span>Way Maker</span>
     </li>
     <li class="lineup-item">
+        <div class="lineup-number">2</div>
         <span>Goodness of God</span>
     </li>
 </ul>
 
-
-
 <footer class="bottom-nav">
-    <a href="team.html">Team</a>
-    <a href="songs.html">Songs</a>
-    <a href="lineup.html">Lineup</a>
+    <a href="team.html" style="color: var(--text-muted); text-decoration: none;">Team</a>
+    <a href="songs.html" style="color: var(--text-muted); text-decoration: none;">Songs</a>
+    <a href="lineup.html" style="color: var(--primary); text-decoration: none; font-weight: 700;">Lineup</a>
 </footer>
 
 </body>

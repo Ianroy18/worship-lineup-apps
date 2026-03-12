@@ -3,60 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Calendar</title>
+    <title>Service Calendar - Dark Mode</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --muted: #64748b;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --primary: #3b82f6;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
         }
 
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); padding: 20px; color: var(--text); }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            padding: 20px; 
+            color: var(--text-main);
+            min-height: 100vh;
+        }
 
+        /* Glassmorphism Card Effect */
         .calendar-card {
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
             padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            border-radius: 24px;
             max-width: 500px;
             margin: 20px auto;
         }
 
-        input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; }
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            margin-bottom: 12px; 
+            background: #0f172a; 
+            border: 1px solid #334155; 
+            border-radius: 12px; 
+            color: white;
+            box-sizing: border-box;
+        }
         
-        .btn-add { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .btn-add { 
+            width: 100%; 
+            padding: 14px; 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
 
-        #calendarList { list-style: none; max-width: 500px; margin: 30px auto; position: relative; }
+        .btn-add:hover { opacity: 0.9; }
 
-        /* Timeline Connector */
-        #calendarList::before { content: ''; position: absolute; left: 25px; top: 0; bottom: 0; width: 2px; background: #e2e8f0; }
+        #calendarList { list-style: none; max-width: 500px; margin: 30px auto; }
 
         .event-item {
-            position: relative;
-            padding: 0 0 24px 50px;
+            margin-bottom: 16px;
         }
 
-        .event-item::after {
-            content: ''; position: absolute; left: 19px; top: 5px; width: 14px; height: 14px;
-            background: var(--primary); border-radius: 50%;
+        .event-content { 
+            background: var(--card-bg); 
+            backdrop-filter: blur(10px);
+            padding: 20px; 
+            border-radius: 16px; 
+            border-left: 4px solid var(--primary);
         }
 
-        .event-content { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .event-date { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+        .event-date { font-size: 0.85rem; color: var(--primary); font-weight: 700; margin-bottom: 4px;}
     </style>
 </head>
 
 <body>
 
-<header>
+<header style="text-align: center; margin-bottom: 20px;">
     <h1>Service Calendar</h1>
-    <a href="../index.html">Home</a>
 </header>
 
 <div class="calendar-card">
-    <h3>New Event</h3>
+    <h3 style="margin-top: 0;">New Event</h3>
     <input id="eventDate" type="date">
     <input id="eventName" placeholder="e.g. Sunday Worship Service">
     <button class="btn-add" onclick="addEvent()">Schedule Event</button>
@@ -66,16 +93,10 @@
     <li class="event-item">
         <div class="event-content">
             <div class="event-date">March 15, 2026</div>
-            <strong>Sunday Worship Service</strong>
+            <strong style="font-size: 1.1rem;">Sunday Worship Service</strong>
         </div>
     </li>
 </ul>
-
-<footer class="bottom-nav">
-    <a href="team.html">Team</a>
-    <a href="songs.html">Songs</a>
-    <a href="lineup.html">Lineup</a>
-</footer>
 
 </body>
 </html>
