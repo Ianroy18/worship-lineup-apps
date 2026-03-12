@@ -1,6 +1,44 @@
 function login(){
-window.location.href="dashboard.html"
+  window.location.href="dashboard.html"
 }
+
+// modal helper: the DOM element is injected once the page loads
+
+function showModal({title = '', body = ''}) {
+  const overlay = document.getElementById('modal-overlay');
+  if (!overlay) return;
+  overlay.querySelector('.modal-title').innerText = title;
+  overlay.querySelector('.modal-body').innerHTML = body;
+  overlay.style.display = 'flex';
+}
+
+function hideModal() {
+  const overlay = document.getElementById('modal-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+// create the overlay when the document is ready
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!document.getElementById('modal-overlay')) {
+    const overlay = document.createElement('div');
+    overlay.id = 'modal-overlay';
+    overlay.innerHTML = `
+      <div id="modal">
+        <div class="modal-header">
+          <span class="modal-title"></span>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body"></div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    overlay.querySelector('.close').addEventListener('click', hideModal);
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) hideModal();
+    });
+  }
+});
 
 function addMember(){
 
